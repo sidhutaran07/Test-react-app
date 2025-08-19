@@ -7,15 +7,11 @@ const API_BASE_URL = 'https://react-todolist-7cwa.onrender.com/api';
 
 // --- Music Player Component ---
 const MusicPlayer = () => {
-  const playlistId = 'PL7v1FHGMOadDghZ1m-jEIUnVUsGMT9jbH';
+  const playlistId = 'PL4fGSI1pDJn6j_g_2tQo1_V9orUu_i_p_';
   const opts = {
     height: '390',
     width: '100%',
-    playerVars: {
-      autoplay: 0,
-      listType: 'playlist',
-      list: playlistId,
-    },
+    playerVars: { autoplay: 0, listType: 'playlist', list: playlistId },
   };
   return (
     <div style={{ marginTop: 40, borderTop: '1px solid #ccc', paddingTop: 20 }}>
@@ -27,7 +23,6 @@ const MusicPlayer = () => {
 
 // --- Main HomePage Component ---
 const HomePage = ({ user }) => {
-  // State for this page's features
   const [task, setTask] = useState('');
   const [todos, setTodos] = useState([]);
   const [editId, setEditId] = useState(null);
@@ -35,12 +30,11 @@ const HomePage = ({ user }) => {
   const [timerMinutes, setTimerMinutes] = useState(15);
   const [timeLeft, setTimeLeft] = useState(timerMinutes * 60);
   const [timerRunning, setTimerRunning] = useState(false);
-  const [stats, setStats] =useState({});
+  const [stats, setStats] = useState({});
 
   const getTodayKey = () => new Date().toISOString().split('T')[0];
 
   useEffect(() => {
-    // Fetch data specific to this page
     const fetchData = async () => {
       try {
         const [todosResponse, statsResponse] = await Promise.all([
@@ -61,7 +55,6 @@ const HomePage = ({ user }) => {
     setStats(response.data);
   };
 
-  // --- To-Do Handlers ---
   const handleAdd = async () => {
     if (task.trim() === '') return;
     const response = await axios.post(`${API_BASE_URL}/todos`, { text: task });
@@ -81,17 +74,14 @@ const HomePage = ({ user }) => {
     setTodos(todos.filter(todo => todo._id !== id));
   };
   
-  // Edit handlers remain local for now
   const handleStartEdit = (id, text) => { setEditId(id); setEditText(text); };
   const handleSaveEdit = (id) => { setTodos(todos.map(todo => (todo._id === id ? { ...todo, text: editText } : todo))); setEditId(null); setEditText(''); };
   const handleCancelEdit = () => { setEditId(null); setEditText(''); };
 
-
-  // --- Timer Logic ---
   useEffect(() => { setTimeLeft(timerMinutes * 60); }, [timerMinutes]);
   useEffect(() => {
     if (!timerRunning || timeLeft <= 0) {
-      if (timeLeft <= 0) setTimerRunning(false);
+      if (timeLeft <= 0) { setTimerRunning(false); alert('Timer Finished!'); }
       return;
     }
     const intervalId = setInterval(() => setTimeLeft(prev => prev - 1), 1000);
@@ -107,49 +97,72 @@ const HomePage = ({ user }) => {
     return `${m}:${s}`;
   };
 
-  // --- Productivity Dashboard Sub-Component ---
-  const ProductivityDashboard = () => (
-    <div style={{ marginTop: 40, borderTop: '1px solid #ccc', paddingTop: 20 }}>
-      <h3>Productivity Dashboard 📊</h3>
-      {/* ... Dashboard JSX ... */}
-    </div>
-  );
-
+  const ProductivityDashboard = () => {
+    const today = getTodayKey();
+    const todayStats = stats[today] || { created: 0, completed: 0 };
+    const score = todayStats.created > 0 ? Math.round((todayStats.completed / todayStats.created) * 100) : 0;
+    return (
+        <div style={{ marginTop: 40, borderTop: '1px solid #ccc', paddingTop: 20 }}>
+            <h3>Productivity Dashboard 📊</h3>
+            <div style={{ background: '#f0f8ff', padding: 15, borderRadius: 8 }}>
+                <h4>Today's Summary</h4>
+                <p><strong>Tasks Created:</strong> {todayStats.created}</p>
+                <p><strong>Tasks Completed:</strong> {todayStats.completed}</p>
+                <p><strong>Productivity Score:</strong> {score}%</p>
+            </div>
+        </div>
+    );
+  };
 
   return (
     <div style={{ maxWidth: 600, margin: 'auto', padding: 20, fontFamily: 'Arial' }}>
       {user ? <h2>Welcome back, {user.displayName}!</h2> : <h2>Welcome to your Productivity Hub!</h2>}
       
-      {/* To-Do Input */}
       <div>
         <input type="text" placeholder="Enter a task" value={task} onChange={e => setTask(e.target.value)} onKeyDown={e => { if (e.key === 'Enter') handleAdd(); }} style={{ width: '70%', padding: 8, marginRight: 8 }} />
         <button onClick={handleAdd} style={{ padding: '8px 12px' }}>Add</button>
       </div>
 
-      {/* Task List */}
       <ul style={{ listStyle: 'none', padding: 0, marginTop: 20 }}>
         {todos.map(todo => (
           <li key={todo._id} style={{ marginBottom: 10, display: 'flex', alignItems: 'center' }}>
-            {/* ... Task item JSX ... */}
+            <input type="checkbox" checked={todo.completed} onChange={() => handleToggle(todo._id)} style={{ marginRight: 10 }} />
+            {editId === todo._id ? (
+              <>
+                <input type="text" value={editText} onChange={e => setEditText(e.target.value)} style={{ flexGrow: 1, padding: 6 }} />
+                <button onClick={() => handleSaveEdit(todo._id)} style={{ marginLeft: 8 }}>Save</button>
+                <button onClick={handleCancelEdit} style={{ marginLeft: 4 }}>Cancel</button>
+              </>
+            ) : (
+              <>
+                <span onDoubleClick={() => handleStartEdit(todo._id, todo.text)} style={{ flexGrow: 1, textDecoration: todo.completed ? 'line-through' : 'none' }} title="Double-click to edit">{todo.text}</span>
+                <button onClick={() => handleDelete(todo._id)} style={{ marginLeft: 10, backgroundColor: '#ff4d4f', color: 'white', border: 'none', padding: '4px 8px' }}>Delete</button>
+              </>
+            )}
           </li>
         ))}
       </ul>
       
-      {/* Link to the new Countdown Timer page */}
       <div style={{ margin: '2rem 0', textAlign: 'center' }}>
         <Link to="/timer">
-          <button style={{ padding: '10px 20px', fontSize: '1.1rem' }}>
-            Start a Focus Session
-          </button>
+          <button style={{ padding: '10px 20px', fontSize: '1.1rem' }}>Start a Focus Session</button>
         </Link>
       </div>
 
       <ProductivityDashboard />
 
-      {/* Mini Timer Section */}
       <div style={{ marginTop: 40, borderTop: '1px solid #ccc', paddingTop: 20 }}>
         <h3>Mini Timer ⏱️</h3>
-        {/* ... Mini timer JSX ... */}
+        <div>
+          <label><input type="radio" name="timer" checked={timerMinutes === 15} onChange={() => setTimerMinutes(15)} /> 15 min</label>{' '}
+          <label><input type="radio" name="timer" checked={timerMinutes === 30} onChange={() => setTimerMinutes(30)} /> 30 min</label>{' '}
+          <label><input type="radio" name="timer" checked={timerMinutes === 50} onChange={() => setTimerMinutes(50)} /> 50 min</label>
+        </div>
+        <div style={{ fontSize: '2rem', marginTop: 10 }}>{formatTime(timeLeft)}</div>
+        <div>
+          {!timerRunning ? <button onClick={startTimer}>Start</button> : <button onClick={pauseTimer}>Pause</button>}
+          <button onClick={resetTimer} style={{ marginLeft: 10 }}>Reset</button>
+        </div>
       </div>
 
       <MusicPlayer />
