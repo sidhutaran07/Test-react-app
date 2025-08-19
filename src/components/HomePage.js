@@ -162,19 +162,40 @@ const HomePage = ({ user }) => {
 
       <ProductivityDashboard />
 
-      <div style={{ marginTop: 40, borderTop: '1px solid #ccc', paddingTop: 20 }}>
-        <h3>Mini Timer ⏱️</h3>
-        <div>
-          <label><input type="radio" name="timer" checked={timerMinutes === 15} onChange={() => setTimerMinutes(15)} /> 15 min</label>{' '}
-          <label><input type="radio" name="timer" checked={timerMinutes === 30} onChange={() => setTimerMinutes(30)} /> 30 min</label>{' '}
-          <label><input type="radio" name="timer" checked={timerMinutes === 50} onChange={() => setTimerMinutes(50)} /> 50 min</label>
-        </div>
-        <div style={{ fontSize: '2rem', marginTop: 10 }}>{formatTime(timeLeft)}</div>
-        <div>
-          {!timerRunning ? <button onClick={startTimer}>Start</button> : <button onClick={pauseTimer}>Pause</button>}
-          <button onClick={resetTimer} style={{ marginLeft: 10 }}>Reset</button>
-        </div>
-      </div>
+      <div style={{
+  marginTop: '40px',
+  border: '1px solid #eee',
+  borderRadius: '8px',
+  padding: '20px',
+  textAlign: 'center',       // This centers everything
+  backgroundColor: '#f9f9f9'  // Adds a light background
+}}>
+  <h3>Mini Timer ⏱️</h3>
+  <div style={{ margin: '15px 0' }}>
+    <label><input type="radio" name="timer" checked={timerMinutes === 15} onChange={() => setTimerMinutes(15)} /> 15 min</label>{' '}
+    <label><input type="radio" name="timer" checked={timerMinutes === 30} onChange={() => setTimerMinutes(30)} /> 30 min</label>{' '}
+    <label><input type="radio" name="timer" checked={timerMinutes === 50} onChange={() => setTimerMinutes(50)} /> 50 min</label>
+  </div>
+
+  {/* Main change is here */}
+  <div style={{
+    fontSize: '5rem',         // Much larger font size
+    fontWeight: 'bold',
+    margin: '10px 0 20px 0'
+  }}>
+    {formatTime(timeLeft)}
+  </div>
+  
+  <div>
+    {/* Made the buttons larger */}
+    {!timerRunning ?
+      <button onClick={startTimer} style={{ padding: '10px 20px', fontSize: '1.1rem' }}>Start</button> :
+      <button onClick={pauseTimer} style={{ padding: '10px 20px', fontSize: '1.1rem' }}>Pause</button>
+    }
+    <button onClick={resetTimer} style={{ marginLeft: 10, padding: '10px 20px', fontSize: '1.1rem' }}>Reset</button>
+  </div>
+</div>
+
 
       <MusicPlayer />
     </div>
