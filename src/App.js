@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import axios from 'axios';
+import { auth } from './firebase';
+import { onAuthStateChanged } from 'firebase/auth';
 
-// Import your components and pages
+// Import all your pages and components
 import Navbar from './components/Navbar';
-import ProtectedRoute from './components/ProtectedRoute';
+import ProtectedRoute from './components/ProtectedRoute'; // Import the guard
 import HomePage from './components/HomePage';
 import ProgressPage from './components/ProgressPage';
 import LoginPage from './components/LoginPage';
+import RegisterPage from './components/RegisterPage';
 import CountdownPage from './components/CountdownPage';
 
 function App() {
@@ -15,18 +17,11 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const res = await axios.get('https://react-todolist-7cwa.onrender.com/api/auth/current_user');
-        setUser(res.data || null);
-      } catch (error) {
-        console.error("Could not fetch user", error);
-        setUser(null);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchUser();
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      setLoading(false);
+    });
+    return () => unsubscribe();
   }, []);
 
   if (loading) {
@@ -35,32 +30,33 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="App">
-        <Navbar user={user} />
+      <Navbar user={user} />
+      <div style={{ padding: '20px' }}>
+        <Routes>
+          {/* Public Routes */}
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/timer" element={<CountdownPage />} />
 
-        <div style={{ padding: '20px' }}>
-          <Routes>
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/timer" element={<CountdownPage />} />
-            
-            <Route
-              path="/"
-              element={
-                <ProtectedRoute user={user}>
-                  <HomePage user={user} />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/progress"
-              element={
-                <ProtectedRoute user={user}>
-                  <ProgressPage />
-                </ProtectedRoute>
-              }
-            />
-          </Routes>
-        </div>
+          {/* --- Protected Routes --- */}
+          {/* These routes are now wrapped in the ProtectedRoute component */}
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute user={user}>
+                <HomePage user={user} />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/progress"
+            element={
+              <ProtectedRoute user={user}>
+                <ProgressPage />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
       </div>
     </BrowserRouter>
   );
