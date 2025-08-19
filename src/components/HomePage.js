@@ -145,8 +145,19 @@ const HomePage = ({ user }) => {
       
       <div style={{ margin: '2rem 0', textAlign: 'center' }}>
         <Link to="/timer">
-          <button style={{ padding: '10px 20px', fontSize: '1.1rem' }}>Start a Focus Session</button>
-        </Link>
+  <button style={{
+    padding: '10px 20px',
+    fontSize: '1.1rem',
+    backgroundColor: 'green', // Add this line
+    color: 'white',           // Add this line
+    border: 'none',           // Optional: for a cleaner look
+    borderRadius: '5px',      // Optional: for rounded corners
+    cursor: 'pointer'         // Optional: shows a hand cursor on hover
+  }}>
+    Start a Focus Session
+  </button>
+</Link>
+
       </div>
 
       <ProductivityDashboard />
