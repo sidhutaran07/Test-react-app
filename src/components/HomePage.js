@@ -7,7 +7,7 @@ const API_BASE_URL = 'https://react-todolist-7cwa.onrender.com/api';
 
 // --- Music Player Component ---
 const MusicPlayer = () => {
-  const playlistId = 'PL4fGSI1pDJn6j_g_2tQo1_V9orUu_i_p_';
+  const playlistId = 'PL7v1FHGMOadDghZ1m-jEIUnVUsGMT9jbH';
   const opts = {
     height: '390',
     width: '100%',
