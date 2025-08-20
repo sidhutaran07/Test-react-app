@@ -1,8 +1,13 @@
-import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth"; // You probably have this already
-import { getFirestore } from "firebase/firestore"; // And this
+// src/firebase.js
 
-// Your web app's Firebase configuration
+// --- IMPORTS ---
+// Make sure all of these are at the top
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore"; // For the database
+
+// --- CONFIGURATION ---
+// This part reads the keys from your Netlify settings
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
@@ -12,11 +17,15 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_FIREBASE_APP_ID
 };
 
-// ADD THIS LINE TO DEBUG
+// --- DEBUGGING ---
+// This line helps us check if the keys are loading correctly
 console.log("Firebase API Key from Netlify:", import.meta.env.VITE_FIREBASE_API_KEY);
 
+
+// --- INITIALIZATION & EXPORTS ---
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-// EXPORT the services you want to use in other files
+
+// Export the services so other files can use them
 export const auth = getAuth(app);
 export const db = getFirestore(app);
