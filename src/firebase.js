@@ -1,19 +1,22 @@
-// src/firebase.js
+// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
-// IMPORTANT: Paste your firebaseConfig object here
+// Your web app's Firebase configuration, read from environment variables
 const firebaseConfig = {
-  apiKey: "AIzaSyAecX5kX7oum6S-tyD92nSBZmROuTsCYXY",
-  authDomain: "reactproject-8d763.firebaseapp.com",
-  projectId: "reactproject-8d763",
-  storageBucket: "reactproject-8d763.firebasestorage.app",
-  messagingSenderId: "369149202",
-  appId: "1:369149202:web:7444edf163d10841bedfcb"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// Export the auth service
+// Export the services you want to use in other parts of your app
+// For example, exporting the auth and firestore services
 export const auth = getAuth(app);
+export const db = getFirestore(app);
