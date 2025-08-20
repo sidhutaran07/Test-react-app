@@ -17,3 +17,6 @@ console.log("Firebase API Key from Netlify:", import.meta.env.VITE_FIREBASE_API_
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+// EXPORT the services you want to use in other files
+export const auth = getAuth(app);
+export const db = getFirestore(app);
