@@ -65,6 +65,8 @@ function App() {
               <ProtectedRoute user={user}>
                 <AIToolpage />
               </ProtectedRoute>
+  }
+/>
         </Routes>
       </div>
     </BrowserRouter>
