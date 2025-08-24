@@ -23,7 +23,7 @@ const AIToolPage = () => {
 
     try {
       // Send a POST request to your n8n webhook URL
-      const response = await fetch(https://taranpreets.app.n8n.cloud/webhook-test/866a84e5-e67b-4a11-bff5-260d7b3e8380, {
+      const response = await fetch(process.env.REACT_APP_N8N_WEBHOOK_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
