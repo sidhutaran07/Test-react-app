@@ -46,6 +46,7 @@ function App() {
             element={
               <ProtectedRoute user={user}>
                 <HomePage user={user} />
+              
               </ProtectedRoute>
             }
           />
@@ -57,6 +58,13 @@ function App() {
               </ProtectedRoute>
             }
           />
+
+            <Route
+            path="/ai-tool"
+            element={
+              <ProtectedRoute user={user}>
+                <AIToolpage />
+              </ProtectedRoute>
         </Routes>
       </div>
     </BrowserRouter>
