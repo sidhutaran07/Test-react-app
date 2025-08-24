@@ -38,7 +38,7 @@ const Navbar = ({ user }) => {
       <div>
         <Link to="/" style={linkStyle}>Home</Link>
         <Link to="/timer" style={linkStyle}>Focus Timer</Link>
-  <Link to="/ai-tool" style={linkstyle}>AI Tool</Link>
+  <Link to="/ai-tool">AI Tool</Link>
 
         {user && <Link to="/progress" style={linkStyle}>Progress</Link>}
       </div>
