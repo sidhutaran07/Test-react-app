@@ -37,9 +37,9 @@ const AIToolPage = () => {
       }
 
       const data = await response.json();
-const { title, intro, content } = data.output;
+const { title, introduction, content } = data.output;
 
-setResult(`${title}\n\n${intro}\n\n${content}`);
+setResult(`${title}\n\n${introduction}\n\n${content}`);
 
     } catch (err) {
       setError(err.message);
