@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { auth } from '../firebase';
-import { onAuthStateChanged } from 'firebase/auth';
 
 const AIToolPage = () => {
   // State for the user's input
