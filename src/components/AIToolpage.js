@@ -37,16 +37,9 @@ const AIToolPage = () => {
       }
 
       const data = await response.json();
+const { title, intro, content } = data.output;
 
-      // IMPORTANT: Adjust 'aiResponse' to match the JSON key your n8n workflow returns.
-      // For example, if n8n returns {"text": "..."}, you should use data.text
-      const aiText = data.aiResponse; 
-      
-      if (!aiText) {
-        throw new Error("The response from the workflow was empty or in the wrong format.");
-      }
-      
-      setResult(aiText);
+setResult(`${title}\n\n${intro}\n\n${content}`);
 
     } catch (err) {
       setError(err.message);
