@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useref } from 'react';
 
 const AIToolPage = () => {
   // State for the user's input
@@ -49,6 +49,16 @@ setResult(`${title}\n\n${introduction}\n\n${content}`);
     }
   };
 
+
+function AIToolPage() {
+  // Track if form has been submitted
+  const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
+
+  // Reference to the form
+  const feedbackFormRef = useRef();
+
+  // ... rest of your component
+}
   return (
     <div style={{ padding: '2rem', fontFamily: 'sans-serif', textAlign: 'center' }}>
       <h1>AI Tool</h1>
