@@ -1,4 +1,4 @@
-import React, { useState, useref } from 'react';
+import React, { useState, useRef } from 'react';
 
 const AIToolPage = () => {
   // State for the user's input
