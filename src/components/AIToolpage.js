@@ -93,5 +93,62 @@ setResult(`${title}\n\n${introduction}\n\n${content}`);
   );
 };
 
+// Inside your existing AI tool page component
+
+{!feedbackSubmitted ? (
+  <form
+    ref={feedbackFormRef}
+    name="ai-feedback"
+    method="POST"
+    data-netlify="true"
+    onSubmit={(e) => {
+      e.preventDefault();
+      const form = feedbackFormRef.current;
+      const formData = new FormData(form);
+
+      fetch("/", { method: "POST", body: formData })
+        .then(() => setFeedbackSubmitted(true))
+        .catch((error) => alert("Submission failed: " + error));
+    }}
+    className="flex flex-col space-y-4 mt-6"
+  >
+    <input type="hidden" name="form-name" value="ai-feedback" />
+
+    <label className="flex flex-col text-sm font-medium">
+      Your Name
+      <input
+        type="text"
+        name="name"
+        className="border rounded p-2 mt-1"
+        placeholder="Enter your name"
+        required
+      />
+    </label>
+
+    <label className="flex flex-col text-sm font-medium">
+      Feedback
+      <textarea
+        name="message"
+        rows="4"
+        className="border rounded p-2 mt-1"
+        placeholder="What should we improve?"
+        required
+      />
+    </label>
+
+    <button
+      type="submit"
+      className="bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
+    >
+      Submit
+    </button>
+  </form>
+) : (
+  <div className="text-center p-4 bg-green-100 rounded mt-6">
+    <h3 className="font-semibold text-lg">🎉 Thanks for your feedback!</h3>
+    <p>We’ll use it to make the AI tool even better.</p>
+  </div>
+)}
+
 export default AIToolPage;
 
