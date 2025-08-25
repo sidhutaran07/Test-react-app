@@ -11,7 +11,7 @@ import ProgressPage from './components/ProgressPage';
 import LoginPage from './components/LoginPage';
 import RegisterPage from './components/RegisterPage';
 import CountdownPage from './components/CountdownPage';
-import AIToolpage from './components/AIToolpage';
+import AIToolPage from './components/AIToolPage';
 
 function App() {
   const [user, setUser] = useState(null);
