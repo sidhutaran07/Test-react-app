@@ -100,9 +100,9 @@ const AIToolPage = () => {
           padding: '1rem'
         }}>
           <h3 style={{ borderBottom: '1px solid #ccc', paddingBottom: '0.5rem' }}>Response:</h3>
-          <pre style={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word', fontFamily: 'inherit', fontSize: '1rem' }}>
+         <ReactMarkdown>
             {result}
-          </pre>
+          </ReactMarkdown>
         </div>
       )}
 
