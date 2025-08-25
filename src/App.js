@@ -63,7 +63,7 @@ function App() {
             path="/ai-tool"
             element={
               <ProtectedRoute user={user}>
-                <AIToolpage />
+                <AIToolPage />
               </ProtectedRoute>
   }
 />
