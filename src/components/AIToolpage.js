@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-
+import ReactMarkdown from 'react-markdown';
 const AIToolPage = () => {
   // AI tool states
   const [prompt, setPrompt] = useState('');
@@ -35,7 +35,7 @@ const AIToolPage = () => {
 
       const data = await response.json();
       const { title, introduction, content } = data.output;
-      setResult(`${title}\n\n${introduction}\n\n${content}`);
+    setResult(`${title}\n\n${introduction}\n\n${content}`);
     } catch (err) {
       setError(err.message);
       console.error("Error communicating with n8n:", err);
