@@ -23,7 +23,7 @@ const AIToolPage = () => {
 
     try {
       // Send a POST request to your n8n webhook URL
-      const response = await fetch("process.env.REACT_APP_N8N_WEBHOOK_URL", {
+      const response = await fetch(process.env.REACT_APP_N8N_WEBHOOK_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ setResult(`${title}\n\n${introduction}\n\n${content}`);
   };
 
 
-function AIToolPage() {
+ {
   // Track if form has been submitted
   const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
 
@@ -59,6 +59,22 @@ function AIToolPage() {
 
   // ... rest of your component
 }
+  {!feedbackSubmitted ? (
+  <form
+    ref={feedbackFormRef}
+    name="ai-feedback"
+    method="POST"
+    data-netlify="true"
+    onSubmit={(e) => {
+      e.preventDefault();
+      const form = feedbackFormRef.current;
+      const formData = new FormData(form);
+
+      fetch("/", { method: "POST", body: formData })
+        .then(() => setFeedbackSubmitted(true))
+        .catch((error) => alert("Submission failed: " + error));
+    }}
+   
   return (
     <div style={{ padding: '2rem', fontFamily: 'sans-serif', textAlign: 'center' }}>
       <h1>AI Tool</h1>
@@ -105,21 +121,7 @@ function AIToolPage() {
 
 // Inside your existing AI tool page component
 
-{!feedbackSubmitted ? (
-  <form
-    ref={feedbackFormRef}
-    name="ai-feedback"
-    method="POST"
-    data-netlify="true"
-    onSubmit={(e) => {
-      e.preventDefault();
-      const form = feedbackFormRef.current;
-      const formData = new FormData(form);
 
-      fetch("/", { method: "POST", body: formData })
-        .then(() => setFeedbackSubmitted(true))
-        .catch((error) => alert("Submission failed: " + error));
-    }}
     className="flex flex-col space-y-4 mt-6"
   >
     <input type="hidden" name="form-name" value="ai-feedback" />
