@@ -77,7 +77,7 @@ import AdminPanel from './pages/AdminPanel';
 
   <Route path="/leads" element={<LeadsPage />} />
   
-  <Route path="/admin" element={<AdminPanel/>} />
+  <Route path="/admin" element={ ProtectedRoute user={user}> <AdminPanel/>} />
   
   </Routes>
       </div>
