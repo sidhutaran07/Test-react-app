@@ -14,7 +14,7 @@ import CountdownPage from './components/CountdownPage';
 import AIToolPage from './components/AIToolPage';
 import AIToolsPage from './components/AIToolsPage';
 import ToolsPage from './components/ToolsPage';
-
+import LeadsPage from './components/LeadsPage';
 function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
