@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { useAuth } from "./src/AuthContext";
+import { useAuth } from "../AuthContext";
 
 export default function Leads() {
   const { currentUser } = useAuth();
