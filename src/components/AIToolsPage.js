@@ -355,7 +355,3 @@ const styles = {
 };
 
 export default AIToolsPage;
-Add this to your router, e.g.:
-// in your routes
-<Route path="/ai-tools" element={<AIToolsPage />} />
-If you later wire a real backend/LLM, replace the stub inside handleGenerate with your API call and set setOutput(responseText).
