@@ -39,9 +39,9 @@ const Navbar = ({ user }) => {
         <Link to="/" style={linkStyle}>Home</Link>
         <Link to="/timer" style={linkStyle}>Focus Timer</Link>
   <Link to="/ai-tool">AI Tool</Link>
-<Link to="/TestFb" style={linkStyle}>TestFirebaseToken </Link> 
-   <Link to="/Aitool" style={linkStyle}>AiTools </Link> 
-  <Link to="/tools"  style={linkStyle>Tools</Link>
+<Link to="/TestFb">TestFirebaseToken </Link> 
+   <Link to="/Aitool" >AiTools </Link> 
+  <Link to="/tools" >Tools</Link>
   {user && <Link to="/progress" style={linkStyle}>Progress</Link>}
       </div>
       <div>
