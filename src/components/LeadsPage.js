@@ -1,97 +1,72 @@
+// src/pages/LeadsPage.jsx
+import React, { useEffect, useState, useContext } from "react";
+import { AuthContext } from "../AuthContext";
 
-import { useState, useEffect } from "react";
-import { useAuth } from "../AuthContext";
-
-export default function Leads() {
-  const { currentUser } = useAuth();
+const LeadsPage = () => {
+  const { user, loading } = useContext(AuthContext);
   const [leads, setLeads] = useState([]);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [status, setStatus] = useState("");
+  const [error, setError] = useState("");
 
-  // Fetch leads (admin only)
   useEffect(() => {
-    if (!currentUser) return;
-    async function fetchLeads() {
+    if (!user) return;
+
+    const fetchLeads = async () => {
       try {
-        const token = await currentUser.getIdToken();
-        const res = await fetch("/api/leads", {
-          headers: { Authorization: `Bearer ${token}` },
+        const token = await user.getIdToken(); // Firebase ID token
+        const res = await fetch("https://react-todolist-7cwa.onrender.com/api/leads", {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
         });
-        if (res.ok) {
-          const data = await res.json();
-          setLeads(data);
+
+        if (!res.ok) {
+          throw new Error(`Error: ${res.status}`);
         }
+
+        const data = await res.json();
+        setLeads(data);
       } catch (err) {
         console.error(err);
+        setError("Failed to fetch leads.");
       }
-    }
-    fetchLeads();
-  }, [currentUser]);
+    };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!name || !email) return;
-    try {
-      const token = await currentUser.getIdToken();
-      const res = await fetch("/api/leads", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ name, email }),
-      });
-      const data = await res.json();
-      if (res.ok) {
-        setStatus("Lead submitted ✅");
-        setLeads((prev) => [...prev, data]);
-        setName("");
-        setEmail("");
-      } else {
-        setStatus(data.error || "Error");
-      }
-    } catch (err) {
-      console.error(err);
-      setStatus("Error submitting lead");
-    }
-  };
+    fetchLeads();
+  }, [user]);
+
+  if (loading) return <p>Loading...</p>;
 
   return (
-    <div className="p-4 border rounded max-w-md">
-      <h3 className="text-lg font-semibold mb-2">Leads</h3>
-
-      <form onSubmit={handleSubmit} className="flex flex-col gap-2 mb-4">
-        <input
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Name"
-          className="p-2 border rounded"
-        />
-        <input
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email"
-          type="email"
-          className="p-2 border rounded"
-        />
-        <button className="p-2 bg-blue-600 text-white rounded">Submit Lead</button>
-      </form>
-
-      {status && <p className="text-sm mb-2">{status}</p>}
-
-      {leads.length > 0 && (
-        <div>
-          <h4 className="font-semibold mb-1">Leads List:</h4>
-          <ul className="list-disc ml-5">
+    <div>
+      <h2>Leads</h2>
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      {leads.length === 0 ? (
+        <p>No leads found.</p>
+      ) : (
+        <table border="1" cellPadding="10" style={{ borderCollapse: "collapse" }}>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Message</th>
+              <th>Created At</th>
+            </tr>
+          </thead>
+          <tbody>
             {leads.map((lead) => (
-              <li key={lead._id}>
-                {lead.name} ({lead.email})
-              </li>
+              <tr key={lead._id}>
+                <td>{lead.name}</td>
+                <td>{lead.email}</td>
+                <td>{lead.message}</td>
+                <td>{new Date(lead.createdAt).toLocaleString()}</td>
+              </tr>
             ))}
-          </ul>
-        </div>
+          </tbody>
+        </table>
       )}
     </div>
   );
-            }
+};
+
+export default LeadsPage;
