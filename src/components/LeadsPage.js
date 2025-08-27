@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { useAuth } from "../AuthContext";
+import { useAuth } from "../firebase";
 
 export default function Leads() {
   const { currentUser } = useAuth();
