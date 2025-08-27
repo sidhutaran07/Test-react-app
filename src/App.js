@@ -12,7 +12,7 @@ import LoginPage from './components/LoginPage';
 import RegisterPage from './components/RegisterPage';
 import CountdownPage from './components/CountdownPage';
 import AIToolPage from './components/AIToolPage';
-
+import AIToolsPage from './components/AIToolsPage';
 function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
