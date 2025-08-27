@@ -74,7 +74,7 @@ function App() {
 
 <Route path="/tools" element={<ToolsPage />} />
 
-  
+  <Route path="leads" element={<LeadsPage />} />
         </Routes>
       </div>
     </BrowserRouter>
