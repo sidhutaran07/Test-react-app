@@ -15,7 +15,8 @@ import AIToolPage from './components/AIToolPage';
 import AIToolsPage from './components/AIToolsPage';
 import ToolsPage from './components/ToolsPage';
 import LeadsPage from './components/LeadsPage';
-function App() {
+import AdminPanel from './pages/AdminPanel';
+  function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -74,8 +75,11 @@ function App() {
 
 <Route path="/tools" element={<ToolsPage />} />
 
-  <Route path="leads" element={<LeadsPage />} />
-        </Routes>
+  <Route path="/leads" element={<LeadsPage />} />
+  
+  <Route path="/admin" element={<AdminPanel/>} />
+  
+  </Routes>
       </div>
     </BrowserRouter>
   );
