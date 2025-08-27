@@ -65,15 +65,13 @@ const AIToolPage = () => {
       </div>
 
       {/* Tool Tiles */}
-      {/* --- MODIFICATION START --- */}
       <div style={{
         display: 'flex',
-        justifyContent: 'center', // Center the items
+        justifyContent: 'center',
         marginTop: '3rem',
         flexWrap: 'wrap',
-        gap: '2rem' // Add space between items
+        gap: '2rem'
       }}>
-      {/* --- MODIFICATION END --- */}
         {[
           {
             name: "Brainstorming AI",
@@ -92,19 +90,25 @@ const AIToolPage = () => {
             img: "/images/robot3.png",
             features: ["Text summarization", "Key points extraction", "Reports"],
             link: "/ai-tools/summary"
+          },
+          // --- NEW CARD ADDED HERE ---
+          {
+            name: "Writing Assistant",
+            img: "/images/robot4.png",
+            features: ["Grammar correction", "Style suggestions", "Tone analysis"],
+            link: "/ai-tools/writing"
           }
+          // --- END OF NEW CARD ---
         ].map((tool) => (
-          // --- MODIFICATION START ---
           <div key={tool.name} style={{
             background: '#fff',
             borderRadius: '12px',
             boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
             padding: '1.5rem',
             textAlign: 'center',
-            flex: '0 1 300px', // Control size: no grow, can shrink, base width 300px
-            boxSizing: 'border-box' // Ensure padding is included in the width
+            flex: '0 1 300px',
+            boxSizing: 'border-box'
           }}>
-          {/* --- MODIFICATION END --- */}
             <img src={tool.img} alt={tool.name} style={{ width: '80px', marginBottom: '1rem' }} />
             <h3 style={{ fontWeight: 'bold', marginBottom: '1rem' }}>{tool.name}</h3>
             <ul style={{ textAlign: 'left', marginBottom: '1rem' }}>
