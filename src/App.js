@@ -70,9 +70,9 @@ function App() {
   }
 />
 
-<Route path="/ai-tools" element={<AIToolsPage />} />
+<Route path="/ai-tools" element={<AIToolsPage /> } />
 
-<Route path="/tools" element={<ToolsPage />} 
+<Route path="/tools" element={<ToolsPage />} />
 
   
         </Routes>
