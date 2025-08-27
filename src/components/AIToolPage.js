@@ -65,7 +65,15 @@ const AIToolPage = () => {
       </div>
 
       {/* Tool Tiles */}
-      <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: '3rem', flexWrap: 'wrap' }}>
+      {/* --- MODIFICATION START --- */}
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center', // Center the items
+        marginTop: '3rem',
+        flexWrap: 'wrap',
+        gap: '2rem' // Add space between items
+      }}>
+      {/* --- MODIFICATION END --- */}
         {[
           {
             name: "Brainstorming AI",
@@ -86,15 +94,17 @@ const AIToolPage = () => {
             link: "/ai-tools/summary"
           }
         ].map((tool) => (
+          // --- MODIFICATION START ---
           <div key={tool.name} style={{
             background: '#fff',
             borderRadius: '12px',
             boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
             padding: '1.5rem',
-            margin: '1rem',
-            width: '250px',
-            textAlign: 'center'
+            textAlign: 'center',
+            flex: '0 1 300px', // Control size: no grow, can shrink, base width 300px
+            boxSizing: 'border-box' // Ensure padding is included in the width
           }}>
+          {/* --- MODIFICATION END --- */}
             <img src={tool.img} alt={tool.name} style={{ width: '80px', marginBottom: '1rem' }} />
             <h3 style={{ fontWeight: 'bold', marginBottom: '1rem' }}>{tool.name}</h3>
             <ul style={{ textAlign: 'left', marginBottom: '1rem' }}>
