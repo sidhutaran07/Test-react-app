@@ -1,4 +1,4 @@
-/ AIToolsPage.jsx
+/ AIToolsPage.js
 import React, { useMemo, useState } from "react";
 
 const AIToolsPage = () => {
