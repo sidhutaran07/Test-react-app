@@ -13,6 +13,8 @@ import RegisterPage from './components/RegisterPage';
 import CountdownPage from './components/CountdownPage';
 import AIToolPage from './components/AIToolPage';
 import AIToolsPage from './components/AIToolsPage';
+import tools from './componenets/toolspage';
+
 function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -70,7 +72,7 @@ function App() {
 
 <Route path="/ai-tools" element={<AIToolsPage />} />
 
-
+<Route path="/tools" element={<ToolsPage />} 
 
   
         </Routes>
