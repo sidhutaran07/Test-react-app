@@ -67,6 +67,12 @@ function App() {
               </ProtectedRoute>
   }
 />
+
+<Route path="/ai-tools" element={<AIToolsPage />} />
+
+
+
+  
         </Routes>
       </div>
     </BrowserRouter>
