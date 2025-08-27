@@ -13,7 +13,7 @@ import RegisterPage from './components/RegisterPage';
 import CountdownPage from './components/CountdownPage';
 import AIToolPage from './components/AIToolPage';
 import AIToolsPage from './components/AIToolsPage';
-import tools from './componenets/toolspage';
+import ToolsPage from './componenets/ToolsPage';
 
 function App() {
   const [user, setUser] = useState(null);
