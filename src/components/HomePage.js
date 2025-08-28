@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import YouTube from 'react-youtube';
+import { checkAdmin } from "../utils/checkAdmin";
 
 const API_BASE_URL = 'https://react-todolist-7cwa.onrender.com/api';
+
 
 // --- Music Player Component ---
 const MusicPlayer = () => {
@@ -22,7 +24,25 @@ const MusicPlayer = () => {
 };
 
 // --- Main HomePage Component ---
-const HomePage = ({ user }) => {
+const HomePage = ({ user }) => 
+  
+export default function Dashboard() {
+  const [isAdmin, setIsAdmin] = useState(false);
+  useEffect(() => {
+    async function verify() {
+      const result = await checkAdmin();
+      setIsAdmin(result);
+    }
+    verify();
+  }, []);
+
+  return (
+    <div>
+      <h1>Dashboard</h1>
+      {isAdmin ? <p>Welcome, Admin!</p> : <p>You are a normal user.</p>}
+    </div>
+  );
+}{
   const [task, setTask] = useState('');
   const [todos, setTodos] = useState([]);
   const [editId, setEditId] = useState(null);
