@@ -14,8 +14,10 @@ import CountdownPage from './components/CountdownPage';
 import AIToolPage from './components/AIToolPage';
 import AIToolsPage from './components/AIToolsPage';
 import ToolsPage from './components/ToolsPage';
-import LeadsPage from './components/LeadsPage';
+import BookSubmissionPage from './components/BookSubmissionPage';
 import AdminPanel from './pages/AdminPanel';
+import AdminDashboard from './pages/AdminDashboard';
+import UserInfoPage from './components/UserInfoPage';
   function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -75,13 +77,20 @@ import AdminPanel from './pages/AdminPanel';
 
 <Route path="/tools" element={<ToolsPage />} />
 
-  <Route path="/leads" element={<LeadsPage />} />
-  
+  <Route path="/BookSubmission" element={<BookSubmissionPage/>} />
+  <Route path="/UserInfo" element={<UserInfoPage/>} />
 <Route
   path="/admin"
   element={
     <ProtectedRoute user={user}>
       <AdminPanel />
+    </ProtectedRoute>
+  }
+/>   <Route
+  path="/admindashboard"
+  element={
+    <ProtectedRoute user={user}>
+      <AdminDashboard />
     </ProtectedRoute>
   }
 />
