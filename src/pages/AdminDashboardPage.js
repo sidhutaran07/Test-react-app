@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import DataTable from '../components/DataTable';
-import { getAuth } from 'firebase/auth'; // ✅ import Firebase auth
+import { getAuth } from 'firebase/auth'; // ✅ Firebase Auth import
 
 // Users table columns
 const userColumns = [
@@ -31,17 +31,17 @@ function AdminDashboardPage() {
       const user = auth.currentUser;
 
       if (!user) {
-        setMessage('You must be logged in with Firebase.');
+        setMessage('⚠️ You must be logged in with Firebase.');
         return;
       }
 
-      // ✅ Get Firebase ID token
+      // ✅ Fetch Firebase ID token
       const token = await user.getIdToken();
 
       const response = await fetch('/api/admin/data', {
-        method: 'GET', // use GET instead of POST since body is not needed
+        method: 'GET', // backend expects GET
         headers: {
-          'Authorization': `Bearer ${token}`,
+          Authorization: `Bearer ${token}`, // pass token in Authorization header
         },
       });
 
@@ -51,7 +51,7 @@ function AdminDashboardPage() {
         setAccessed(true);
       } else {
         const error = await response.json();
-        setMessage(error.error || 'Access denied.');
+        setMessage(error.message || error.error || 'Access denied.');
       }
     } catch (error) {
       setMessage('Error: ' + error.message);
