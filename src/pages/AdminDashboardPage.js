@@ -2,10 +2,7 @@ import React, { useState } from "react";
 import DataTable from "../components/DataTable";
 import { getAuth } from "firebase/auth";
 import api from "../api";
-const token = await user.getIdToken(); // fresh token
-const res = await api.get("/admin/data", {
-  headers: { Authorization: `Bearer ${token}` },
-});
+
 const userColumns = [
   { header: "Name", accessor: "name" },
   { header: "Email", accessor: "email" },
@@ -37,8 +34,10 @@ function AdminDashboardPage() {
         return;
       }
 
+      // ✅ Fetch fresh Firebase ID token
       const token = await user.getIdToken();
 
+      // ✅ Make secure API request with axios instance
       const response = await api.get("/admin/data", {
         headers: { Authorization: `Bearer ${token}` },
       });
