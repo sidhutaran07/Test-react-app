@@ -12,7 +12,7 @@ import LoginPage from './components/LoginPage';
 import RegisterPage from './components/RegisterPage';
 import CountdownPage from './components/CountdownPage';
 import AIToolPage from './components/AIToolPage';
-import AIToolsPage from './components/AIToolsPage';
+
 import ToolsPage from './components/ToolsPage';
 import BookSubmissionPage from './components/BookSubmissionPage';
 import 
@@ -73,7 +73,7 @@ import UserInfoPage from './components/UserInfoPage';
   }
 />
 
-<Route path="/ai-tools" element={<AIToolsPage /> } />
+
 
 <Route path="/tools" element={<ToolsPage />} />
 
