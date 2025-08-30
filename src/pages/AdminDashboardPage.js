@@ -4,8 +4,6 @@ import React, { useState } from 'react';
 import UserList from './components/UserList';
 import LeadList from './components/LeadList';
 
-function AdminDashboardPage() {
-  // ... rest of the code is correct
 
 function AdminDashboardPage() {
   const [email, setEmail] = useState('');
