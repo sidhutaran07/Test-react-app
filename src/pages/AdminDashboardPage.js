@@ -47,41 +47,43 @@ function AdminDashboardPage() {
   };
 
   return (
-    <div>
-      <h2>Admin Dashboard</h2>
-      {!accessed ? (<form onSubmit={handleAccess}>
-  <label>
-    Enter Admin Email:
-    <input
-      type="email"
-      value={email}
-      // THIS LINE IS THE FIX.
-      // It uses the 'setEmail' function, which solves the error.
-      onChange={(e) => setEmail(e.target.value)}
-      required
-    />
-  </label><br />
-  <button type="submit">Access Dashboard</button>
-</form>
-
-        <div>
-          {/* 4. Use the DataTable for BOTH users and leads */}
-          <DataTable
-            title="Users"
-            items={data.users}
-            columns={userColumns}
-          />
-          <hr />
-          <DataTable
-            title="Leads"
-            items={data.leads}
-            columns={leadColumns}
-          />
-        </div>
-      )}
-      {message && <p>{message}</p>}
-    </div>
-  );
-}
+    return (
+  <div>
+    <h2>Admin Dashboard</h2>
+    {!accessed ? (
+      <>
+        <form onSubmit={handleAccess}>
+          <label>
+            Enter Admin Email:
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </label>
+          <br />
+          <button type="submit">Access Dashboard</button>
+        </form>
+      </>
+    ) : (
+      <div>
+        {/* 4. Use the DataTable for BOTH users and leads */}
+        <DataTable
+          title="Users"
+          items={data.users}
+          columns={userColumns}
+        />
+        <hr />
+        <DataTable
+          title="Leads"
+          items={data.leads}
+          columns={leadColumns}
+        />
+      </div>
+    )}
+    {message && <p>{message}</p>}
+  </div>
+);
 
 export default AdminDashboardPage;
