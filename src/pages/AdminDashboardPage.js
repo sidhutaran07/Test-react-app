@@ -1,10 +1,8 @@
-// frontend/src/pages/AdminDashboardPage.js
 import React, { useState } from "react";
 import DataTable from "../components/DataTable";
 import { getAuth } from "firebase/auth";
-import api from "../api"; // ✅ axios instance
+import api from "../api";
 
-// Users table columns
 const userColumns = [
   { header: "Name", accessor: "name" },
   { header: "Email", accessor: "email" },
@@ -13,11 +11,11 @@ const userColumns = [
   { header: "Social Media", accessor: "socialMedia" },
 ];
 
-// Leads table columns
 const leadColumns = [
   { header: "Name", accessor: "name" },
   { header: "Email", accessor: "email" },
   { header: "Interested In", accessor: "interestedIn" },
+  { header: "Category", accessor: "category" },
 ];
 
 function AdminDashboardPage() {
@@ -36,22 +34,17 @@ function AdminDashboardPage() {
         return;
       }
 
-      // ✅ Firebase token
       const token = await user.getIdToken();
 
-      // ✅ axios GET request with token
       const response = await api.get("/admin/data", {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      setData(response.data); // axios gives data directly
+      setData(response.data);
       setAccessed(true);
     } catch (error) {
-      setMessage(
-        error.response?.data?.message ||
-          error.response?.data?.error ||
-          error.message
-      );
+      console.error("Error fetching admin data:", error);
+      setMessage("❌ Access denied.");
     }
   };
 
