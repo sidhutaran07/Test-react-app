@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import DataTable from '../components/DataTable';
 import { getAuth } from 'firebase/auth'; // ✅ Firebase Auth import
-
+import API_BASE_URL from "../config";
 // Users table columns
 const userColumns = [
   { header: 'Name', accessor: 'name' },
