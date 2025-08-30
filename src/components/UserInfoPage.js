@@ -1,6 +1,6 @@
 // Frontend: src/UserInfoPage.js (Page 1: User Information Form)
 import React, { useState } from 'react';
-
+import API_BASE_URL from "../config";
 function UserInfoPage() {
   const [formData, setFormData] = useState({
     name: '',
