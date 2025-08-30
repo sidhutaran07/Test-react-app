@@ -26,7 +26,6 @@ function AdminDashboardPage() {
   const [accessed, setAccessed] = useState(false);
 
   const handleAccess = async (e) => {
-    // ... (This function remains exactly the same)
     e.preventDefault();
     try {
       const response = await fetch('/api/admin/data', {
@@ -47,11 +46,9 @@ function AdminDashboardPage() {
   };
 
   return (
-  
-  <div>
-    <h2>Admin Dashboard</h2>
-    {!accessed ? (
-      <>
+    <div>
+      <h2>Admin Dashboard</h2>
+      {!accessed ? (
         <form onSubmit={handleAccess}>
           <label>
             Enter Admin Email:
@@ -65,25 +62,25 @@ function AdminDashboardPage() {
           <br />
           <button type="submit">Access Dashboard</button>
         </form>
-      </>
-    ) : (
-      <div>
-        {/* 4. Use the DataTable for BOTH users and leads */}
-        <DataTable
-          title="Users"
-          items={data.users}
-          columns={userColumns}
-        />
-        <hr />
-        <DataTable
-          title="Leads"
-          items={data.leads}
-          columns={leadColumns}
-        />
-      </div>
-    )}
-    {message && <p>{message}</p>}
-  </div>
-);
+      ) : (
+        <div>
+          {/* 4. Use the DataTable for BOTH users and leads */}
+          <DataTable
+            title="Users"
+            items={data.users}
+            columns={userColumns}
+          />
+          <hr />
+          <DataTable
+            title="Leads"
+            items={data.leads}
+            columns={leadColumns}
+          />
+        </div>
+      )}
+      {message && <p>{message}</p>}
+    </div>
+  );
+} // ✅ properly close the component function
 
 export default AdminDashboardPage;
