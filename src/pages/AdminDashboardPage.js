@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 // 1. Import the single, reusable component
-import DataTable from './components/DataTable';
+import DataTable from '../components/DataTable';
 
 // 2. Define the columns for the Users table
 const userColumns = [
