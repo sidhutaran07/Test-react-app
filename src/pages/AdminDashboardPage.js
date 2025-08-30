@@ -47,7 +47,7 @@ function AdminDashboardPage() {
   };
 
   return (
-    return (
+  
   <div>
     <h2>Admin Dashboard</h2>
     {!accessed ? (
