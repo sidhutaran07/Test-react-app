@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 // 1. Import the new components
-import BookSubmissionPagefrom './components/BookSubmissionPage';
-import UserInfoPage from './components/UserInfoPage';
+
+import UserList from './components/UserList';
+import LeadList from './components/LeadList';
+
+function AdminDashboardPage() {
+  // ... rest of the code is correct
 
 function AdminDashboardPage() {
   const [email, setEmail] = useState('');
