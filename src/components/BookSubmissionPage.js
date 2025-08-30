@@ -1,7 +1,5 @@
-
 import React, { useState } from "react";
-import axios from "axios";
-import API_BASE_URL from "../config";
+import api from "../api";
 
 const BookSubmissionPage = () => {
   const [title, setTitle] = useState("");
@@ -12,10 +10,7 @@ const BookSubmissionPage = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post(`${API_BASE_URL}/books`, {
-        title,
-        author,
-      });
+      await api.post("/books", { title, author });
       setMessage("✅ Book submitted successfully!");
       setTitle("");
       setAuthor("");
