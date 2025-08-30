@@ -49,9 +49,21 @@ function AdminDashboardPage() {
   return (
     <div>
       <h2>Admin Dashboard</h2>
-      {!accessed ? (
-        <form onSubmit={handleAccess}> {/* ... Login form ... */} </form>
-      ) : (
+      {!accessed ? (<form onSubmit={handleAccess}>
+  <label>
+    Enter Admin Email:
+    <input
+      type="email"
+      value={email}
+      // THIS LINE IS THE FIX.
+      // It uses the 'setEmail' function, which solves the error.
+      onChange={(e) => setEmail(e.target.value)}
+      required
+    />
+  </label><br />
+  <button type="submit">Access Dashboard</button>
+</form>
+
         <div>
           {/* 4. Use the DataTable for BOTH users and leads */}
           <DataTable
