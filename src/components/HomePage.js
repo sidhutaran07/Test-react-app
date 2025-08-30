@@ -3,8 +3,8 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import YouTube from "react-youtube";
 import { checkAdmin } from "../utils/checkAdmin";
+import API_BASE_URL from "../config";
 
-const API_BASE_URL = "https://react-todolist-7cwa.onrender.com/api";
 
 // --- Music Player Component ---
 const MusicPlayer = () => {
