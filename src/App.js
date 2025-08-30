@@ -12,10 +12,8 @@ import LoginPage from './components/LoginPage';
 import RegisterPage from './components/RegisterPage';
 import CountdownPage from './components/CountdownPage';
 import AIToolPage from './components/AIToolPage';
-
 import ToolsPage from './components/ToolsPage';
 import BookSubmissionPage from './components/BookSubmissionPage';
-import 
 import AdminDashboardPage from './pages/AdminDashboardPage';
 import UserInfoPage from './components/UserInfoPage';
   function App() {
