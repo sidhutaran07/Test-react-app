@@ -1,27 +1,29 @@
-import React, { useState } from 'react';
-import DataTable from '../components/DataTable';
-import { getAuth } from 'firebase/auth'; // ✅ Firebase Auth import
+import React, { useState } from "react";
+import DataTable from "../components/DataTable";
+import { getAuth } from "firebase/auth"; // ✅ Firebase Auth import
+import axios from "axios";
 import API_BASE_URL from "../config";
+
 // Users table columns
 const userColumns = [
-  { header: 'Name', accessor: 'name' },
-  { header: 'Email', accessor: 'email' },
-  { header: 'Qualification', accessor: 'qualification' },
-  { header: 'Contact', accessor: 'contact' },
-  { header: 'Social Media', accessor: 'socialMedia' },
+  { header: "Name", accessor: "name" },
+  { header: "Email", accessor: "email" },
+  { header: "Qualification", accessor: "qualification" },
+  { header: "Contact", accessor: "contact" },
+  { header: "Social Media", accessor: "socialMedia" },
 ];
 
 // Leads table columns
 const leadColumns = [
-  { header: 'Name', accessor: 'name' },
-  { header: 'Email', accessor: 'email' },
-  { header: 'Interested In', accessor: 'interestedIn' },
-  { header: 'Category', accessor: 'category' },
+  { header: "Name", accessor: "name" },
+  { header: "Email", accessor: "email" },
+  { header: "Interested In", accessor: "interestedIn" },
+  { header: "Category", accessor: "category" },
 ];
 
 function AdminDashboardPage() {
   const [data, setData] = useState({ users: [], leads: [] });
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   const [accessed, setAccessed] = useState(false);
 
   const handleAccess = async (e) => {
@@ -31,30 +33,29 @@ function AdminDashboardPage() {
       const user = auth.currentUser;
 
       if (!user) {
-        setMessage('⚠️ You must be logged in with Firebase.');
+        setMessage("⚠️ You must be logged in with Firebase.");
         return;
       }
 
-      // ✅ Fetch Firebase ID token
+      // ✅ Get Firebase ID token
       const token = await user.getIdToken();
 
-      const response = await fetch('/api/admin/data', {
-        method: 'GET', // backend expects GET
+      // ✅ Request backend with axios
+      const res = await axios.get(`${API_BASE_URL}/admin/data`, {
         headers: {
-          Authorization: `Bearer ${token}`, // pass token in Authorization header
+          Authorization: `Bearer ${token}`,
         },
       });
 
-      if (response.ok) {
-        const result = await response.json();
-        setData(result);
-        setAccessed(true);
-      } else {
-        const error = await response.json();
-        setMessage(error.message || error.error || 'Access denied.');
-      }
+      setData(res.data);
+      setAccessed(true);
     } catch (error) {
-      setMessage('Error: ' + error.message);
+      console.error("Error fetching admin data:", error);
+      setMessage(
+        error.response?.data?.message ||
+          error.response?.data?.error ||
+          "❌ Access denied."
+      );
     }
   };
 
