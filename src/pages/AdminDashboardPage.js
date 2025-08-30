@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-// 1. Import the single, reusable component
 import DataTable from '../components/DataTable';
+import { getAuth } from 'firebase/auth'; // ✅ import Firebase auth
 
-// 2. Define the columns for the Users table
+// Users table columns
 const userColumns = [
   { header: 'Name', accessor: 'name' },
   { header: 'Email', accessor: 'email' },
@@ -11,7 +11,7 @@ const userColumns = [
   { header: 'Social Media', accessor: 'socialMedia' },
 ];
 
-// 3. Define the columns for the Leads table
+// Leads table columns
 const leadColumns = [
   { header: 'Name', accessor: 'name' },
   { header: 'Email', accessor: 'email' },
@@ -20,7 +20,6 @@ const leadColumns = [
 ];
 
 function AdminDashboardPage() {
-  const [email, setEmail] = useState('');
   const [data, setData] = useState({ users: [], leads: [] });
   const [message, setMessage] = useState('');
   const [accessed, setAccessed] = useState(false);
@@ -28,17 +27,31 @@ function AdminDashboardPage() {
   const handleAccess = async (e) => {
     e.preventDefault();
     try {
+      const auth = getAuth();
+      const user = auth.currentUser;
+
+      if (!user) {
+        setMessage('You must be logged in with Firebase.');
+        return;
+      }
+
+      // ✅ Get Firebase ID token
+      const token = await user.getIdToken();
+
       const response = await fetch('/api/admin/data', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
+        method: 'GET', // use GET instead of POST since body is not needed
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
       });
+
       if (response.ok) {
         const result = await response.json();
         setData(result);
         setAccessed(true);
       } else {
-        setMessage('Access denied.');
+        const error = await response.json();
+        setMessage(error.error || 'Access denied.');
       }
     } catch (error) {
       setMessage('Error: ' + error.message);
@@ -50,37 +63,19 @@ function AdminDashboardPage() {
       <h2>Admin Dashboard</h2>
       {!accessed ? (
         <form onSubmit={handleAccess}>
-          <label>
-            Enter Admin Email:
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </label>
-          <br />
+          <p>Click below to access the Admin Dashboard</p>
           <button type="submit">Access Dashboard</button>
         </form>
       ) : (
         <div>
-          {/* 4. Use the DataTable for BOTH users and leads */}
-          <DataTable
-            title="Users"
-            items={data.users}
-            columns={userColumns}
-          />
+          <DataTable title="Users" items={data.users} columns={userColumns} />
           <hr />
-          <DataTable
-            title="Leads"
-            items={data.leads}
-            columns={leadColumns}
-          />
+          <DataTable title="Leads" items={data.leads} columns={leadColumns} />
         </div>
       )}
       {message && <p>{message}</p>}
     </div>
   );
-} // ✅ properly close the component function
+}
 
 export default AdminDashboardPage;
