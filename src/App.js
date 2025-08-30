@@ -15,7 +15,7 @@ import AIToolPage from './components/AIToolPage';
 import AIToolsPage from './components/AIToolsPage';
 import ToolsPage from './components/ToolsPage';
 import BookSubmissionPage from './components/BookSubmissionPage';
-import AdminPanel from './pages/AdminPanel';
+import 
 import AdminDashboardPage from './pages/AdminDashboardPage';
 import UserInfoPage from './components/UserInfoPage';
   function App() {
@@ -79,14 +79,7 @@ import UserInfoPage from './components/UserInfoPage';
 
   <Route path="/BookSubmission" element={<BookSubmissionPage/>} />
   <Route path="/UserInfo" element={<UserInfoPage/>} />
-<Route
-  path="/admin"
-  element={
-    <ProtectedRoute user={user}>
-      <AdminPanel />
-    </ProtectedRoute>
-  }
-/>   <Route
+  <Route
   path="/admindashboard"
   element={
     <ProtectedRoute user={user}>
