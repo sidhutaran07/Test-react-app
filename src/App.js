@@ -16,7 +16,7 @@ import AIToolsPage from './components/AIToolsPage';
 import ToolsPage from './components/ToolsPage';
 import BookSubmissionPage from './components/BookSubmissionPage';
 import AdminPanel from './pages/AdminPanel';
-import AdminDashboard from './pages/AdminDashboard';
+import AdminDashboardPage from './pages/AdminDashboardPage';
 import UserInfoPage from './components/UserInfoPage';
   function App() {
   const [user, setUser] = useState(null);
@@ -90,7 +90,7 @@ import UserInfoPage from './components/UserInfoPage';
   path="/admindashboard"
   element={
     <ProtectedRoute user={user}>
-      <AdminDashboard />
+      <AdminDashboardPage/>
     </ProtectedRoute>
   }
 />
