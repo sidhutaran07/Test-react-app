@@ -66,7 +66,7 @@ export default function Inventory() {
   async function fetchItems() {
     setLoadingList(true);
     try {
-      const res = await fetch("/api/items");
+      const res = await fetch(`${API_BASE_URL}/api/items');
       const json = await res.json();
       setItems(json);
     } catch {
