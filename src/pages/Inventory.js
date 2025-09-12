@@ -66,7 +66,8 @@ export default function Inventory() {
   async function fetchItems() {
     setLoadingList(true);
     try {
-      const res = await fetch(`${API_BASE_URL}/items');
+      // FIX: Missing closing quote for the URL string
+      const res = await fetch(`${API_BASE_URL}/items`);
       const json = await res.json();
       setItems(json);
     } catch {
@@ -109,11 +110,12 @@ export default function Inventory() {
 
     try {
       setSaving(true);
-      const res = await fetch(`${API_BASE_URL}/items`);
+      // FIX: Incorrect syntax for fetch options. The options object must be the second argument.
+      const res = await fetch(`${API_BASE_URL}/items`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(ready),
-      };
+      });
       if (!res.ok) throw new Error("Save failed");
       setRows([{ category: "", name: "", price: "" }]);
       await fetchItems();
@@ -126,7 +128,8 @@ export default function Inventory() {
 
   async function deleteItem(id) {
     try {
-      await fetch(`${API}/api/items/${id}`, { method: "DELETE" });
+      // FIX: The URL for deleteItem was `API` instead of `API_BASE_URL`.
+      await fetch(`${API_BASE_URL}/items/${id}`, { method: "DELETE" });
       await fetchItems();
     } catch {}
   }
@@ -220,4 +223,4 @@ export default function Inventory() {
       </footer>
     </div>
   );
-}
+                                     }
