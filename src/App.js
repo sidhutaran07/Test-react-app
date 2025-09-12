@@ -16,7 +16,7 @@ import ToolsPage from './components/ToolsPage';
 import BookSubmissionPage from './components/BookSubmissionPage';
 import AdminDashboardPage from './pages/AdminDashboardPage';
 import UserInfoPage from './components/UserInfoPage';
-import Inventory from './pages/Inventory;
+import Inventory from './pages/Inventory';
   function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
