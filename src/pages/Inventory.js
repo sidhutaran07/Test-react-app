@@ -4,7 +4,7 @@ import { Input } from "../components/ui/Input";
 import { Label } from "../components/ui/Label";
 import { Card, CardContent, CardHeader } from "../components/ui/Card";
 import { Table, THead, TBody, TR, TH, TD } from "../components/ui/Table";
-
+import API_BASE_URL from "../config";
 
 function RowEditor({ row, onChange, onRemove }) {
   return (
