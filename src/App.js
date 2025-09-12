@@ -16,6 +16,7 @@ import ToolsPage from './components/ToolsPage';
 import BookSubmissionPage from './components/BookSubmissionPage';
 import AdminDashboardPage from './pages/AdminDashboardPage';
 import UserInfoPage from './components/UserInfoPage';
+import Inventory from './pages/Inventory;
   function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -82,6 +83,13 @@ import UserInfoPage from './components/UserInfoPage';
   element={
     <ProtectedRoute user={user}>
       <AdminDashboardPage/>
+    </ProtectedRoute>
+    <Route 
+    path="/inventory"
+      element={
+      <ProtectedRoute user={user}>
+        <Inventory/>  
+      }
     </ProtectedRoute>
   }
 />
