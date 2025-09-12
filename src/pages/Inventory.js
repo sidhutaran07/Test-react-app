@@ -109,7 +109,7 @@ export default function Inventory() {
 
     try {
       setSaving(true);
-      const res = await fetch(`${API}/api/items`, {
+      const res = await fetch(`${API_BASE_URL}/items`);
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(ready),
