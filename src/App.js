@@ -42,10 +42,14 @@ import Inventory from './pages/Inventory';
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/timer" element={<CountdownPage />} />
+           <Route path="/tools" element={<ToolsPage />} />
 
+  <Route path="/BookSubmission" element={<BookSubmissionPage/>} />
+  <Route path="/UserInfo" element={<UserInfoPage/>} />
           {/* --- Protected Routes --- */}
           {/* These routes are now wrapped in the ProtectedRoute component */}
-          <Route
+          
+      <Route
             path="/"
             element={
               <ProtectedRoute user={user}>
@@ -74,22 +78,20 @@ import Inventory from './pages/Inventory';
 
 
 
-<Route path="/tools" element={<ToolsPage />} />
 
-  <Route path="/BookSubmission" element={<BookSubmissionPage/>} />
-  <Route path="/UserInfo" element={<UserInfoPage/>} />
   <Route
   path="/admindashboard"
   element={
     <ProtectedRoute user={user}>
       <AdminDashboardPage/>
-    </ProtectedRoute>
+    </ProtectedRoute> } /> 
+  
     <Route 
     path="/inventory"
       element={
       <ProtectedRoute user={user}>
         <Inventory/>  
-      }
+      
     </ProtectedRoute>
   }
 />
