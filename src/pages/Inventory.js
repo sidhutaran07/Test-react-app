@@ -113,7 +113,7 @@ export default function Inventory() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(ready),
-      });
+      };
       if (!res.ok) throw new Error("Save failed");
       setRows([{ category: "", name: "", price: "" }]);
       await fetchItems();
