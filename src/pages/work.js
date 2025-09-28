@@ -1,6 +1,6 @@
 import Soundcloudwidget from "../components/Soundcloudwidget";
 import DraggableWidgetContainer from "../components/DraggableWidgetContainer";
-export default function () work{
+export default function  work () {
   return(
 <section>
     <header className="mb-6">
