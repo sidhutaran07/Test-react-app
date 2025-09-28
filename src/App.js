@@ -17,6 +17,7 @@ import BookSubmissionPage from './components/BookSubmissionPage';
 import AdminDashboardPage from './pages/AdminDashboardPage';
 import UserInfoPage from './components/UserInfoPage';
 import Inventory from './pages/Inventory';
+import Soundcloudwidget from './components/Soundcloudwidget';
   function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -43,6 +44,7 @@ import Inventory from './pages/Inventory';
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/timer" element={<CountdownPage />} />
            <Route path="/tools" element={<ToolsPage />} />
+    <Route path="/sound" element={<soundcloud/>}/>
 
   <Route path="/BookSubmission" element={<BookSubmissionPage/>} />
   <Route path="/UserInfo" element={<UserInfoPage/>} />
