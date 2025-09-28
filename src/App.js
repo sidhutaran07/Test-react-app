@@ -17,7 +17,7 @@ import BookSubmissionPage from './components/BookSubmissionPage';
 import AdminDashboardPage from './pages/AdminDashboardPage';
 import UserInfoPage from './components/UserInfoPage';
 import Inventory from './pages/Inventory';
-import Soundcloudwidget from './components/Soundcloudwidget';
+import DraggableSoundCloudWidget from './components/Soundcloudwidget';
   function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
