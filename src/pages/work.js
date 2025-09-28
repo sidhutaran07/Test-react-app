@@ -9,12 +9,7 @@ export default function work{
       </header>
     <div className="grid gap-6">
         <DraggableWidgetContainer>
-          <QuoteWidget />
-          <GoalWidget />
-          <Stickynotes embedded />
-          <Timerwidget />
-          <PinnedLinksWidget />
-          <DocWidget />
+         
           <DraggableSoundCloudWidget />
         </DraggableWidgetContainer>
       </div>
