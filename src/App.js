@@ -18,6 +18,7 @@ import AdminDashboardPage from './pages/AdminDashboardPage';
 import UserInfoPage from './components/UserInfoPage';
 import Inventory from './pages/Inventory';
 import Work from './pages/Work';
+import Aichat from './pages/Aichat';
   function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -97,6 +98,14 @@ import Work from './pages/Work';
     </ProtectedRoute>
   }
 />
+
+
+  <Route
+  path="/aichat"
+    element={
+      <ProtectedRoute user={user}>
+      <Aichat/>
+      </ProtectedRoute>
   </Routes>
       </div>
     </BrowserRouter>
