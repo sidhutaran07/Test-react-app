@@ -17,7 +17,6 @@ import BookSubmissionPage from './components/BookSubmissionPage';
 import AdminDashboardPage from './pages/AdminDashboardPage';
 import UserInfoPage from './components/UserInfoPage';
 import Inventory from './pages/Inventory';
-import Work from './pages/Work';
 import AiChat from './pages/AiChat';
   function App() {
   const [user, setUser] = useState(null);
