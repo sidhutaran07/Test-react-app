@@ -44,7 +44,7 @@ import AiChat from './pages/AiChat';
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/timer" element={<CountdownPage />} />
            <Route path="/tools" element={<ToolsPage />} />
-    <Route path="/work" element={<Work/>}/>
+  
 
   <Route path="/BookSubmission" element={<BookSubmissionPage/>} />
   <Route path="/UserInfo" element={<UserInfoPage/>} />
