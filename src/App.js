@@ -106,6 +106,8 @@ import AiChat from './pages/AiChat';
       <ProtectedRoute user={user}>
       <Aichat/>
       </ProtectedRoute>
+    }
+/>
   </Routes>
       </div>
     </BrowserRouter>
