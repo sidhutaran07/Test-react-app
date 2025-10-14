@@ -1,5 +1,6 @@
 import Soundcloudwidget from "../components/Soundcloudwidget";
-import DraggableWidgetBoard from "../components/DraggableWidgetBoard";
+import DraggableWidgetBoard from "../components/DraggableWidgetBoard.js";
+
 export default function  Work () {
   return(
 <section>
