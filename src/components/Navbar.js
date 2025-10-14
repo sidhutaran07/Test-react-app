@@ -42,6 +42,7 @@ const Navbar = ({ user }) => {
 <Link to="/TestFb">TestFirebaseToken </Link> 
    <Link to="/Aitool" >AiTools </Link> 
   <Link to="/tools" >Tools</Link>
+  <Link to="/Aichat" >AiChat</Link>
   {user && <Link to="/progress" style={linkStyle}>Progress</Link>}
       </div>
       <div>
