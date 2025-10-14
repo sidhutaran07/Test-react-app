@@ -5,7 +5,7 @@ import { useChatStream } from "./useChatStream";
 import { Card, CardContent } from "./components/ui/card";
 import { Separator } from "./components/ui/separator";
 
-export default function App() {
+export default function AiChat () =>{
   const [messages, setMessages] = useState([
     { role: "assistant", content: "Hi! Ask me anything ✨" },
   ]);
