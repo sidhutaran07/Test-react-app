@@ -1,9 +1,9 @@
 import { useMemo, useState } from "react";
-import Banner from "./components/Banner";
-import ChatComposer from "./components/ChatComposer";
+import Banner from "../components/Banner";
+import ChatComposer from "../components/ChatComposer";
 import { useChatStream } from "../useChatStream";
-import { Card, CardContent } from "./components/ui/card";
-import { Separator } from "./components/ui/separator";
+import { Card, CardContent } from "../components/ui/card";
+import { Separator } from "../components/ui/separator";
 
 export default function AiChat () {
   const [messages, setMessages] = useState([
