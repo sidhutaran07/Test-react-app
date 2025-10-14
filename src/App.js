@@ -103,7 +103,7 @@ import AiChat from './pages/AiChat';
   path="/aichat"
     element={
       <ProtectedRoute user={user}>
-      <Aichat/>
+      <AiChat/>
       </ProtectedRoute>
     }
 />
